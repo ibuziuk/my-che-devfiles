@@ -1,6 +1,6 @@
 ---
 specVersion: 0.0.1
-name: java-maven
+name: spring-rest-guide
 projects:
   - name: gs-rest-service
     source:
@@ -40,7 +40,7 @@ components:
     endpoints:
       - name: '8080/tcp'
         port: 8080
-    mountSources: true
+    mountSources: false
     volumes:
       - name: m2
         containerPath: /home/user/.m2
