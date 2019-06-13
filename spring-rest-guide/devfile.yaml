@@ -22,8 +22,7 @@ components:
       - name: MAVEN_OPTS
         value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
           -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
-          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom
-          -Duser.home=/home/user"
+          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom -Duser.home=/home/user"
       - name: JAVA_OPTS
         value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
           -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
@@ -44,14 +43,16 @@ components:
     volumes:
       - name: m2
         containerPath: /home/user/.m2
+      - name: projects
+        containerPath: /projects
 commands:
   - name: run-complete-example
     actions:
       - type: exec
         component: maven
-        command: "mvn -f /projects/gs-rest-service/complete spring-boot:run"
+        command: "mvn -f ${CHE_PROJECTS_ROOT}/gs-rest-service/complete spring-boot:run"
   - name: run-initial-example
     actions:
       - type: exec
         component: maven
-        command: "mvn -f /projects/gs-rest-service/initial spring-boot:run"
+        command: "mvn -f ${CHE_PROJECTS_ROOT}/gs-rest-service/initial spring-boot:run"
