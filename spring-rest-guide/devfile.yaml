@@ -45,12 +45,12 @@ components:
       - name: m2
         containerPath: /home/user/.m2
 commands:
-  - name: complete example :: run
+  - name: run-complete-example
     actions:
       - type: exec
         component: maven
         command: "mvn -f /projects/gs-rest-service/complete spring-boot:run"
-  - name: initial example :: run
+  - name: run-initial-example
     actions:
       - type: exec
         component: maven
