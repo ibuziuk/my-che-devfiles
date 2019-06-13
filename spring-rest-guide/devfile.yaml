@@ -52,11 +52,6 @@ commands:
       - type: exec
         component: maven
         command: "mvn -f ${CHE_PROJECTS_ROOT}/gs-rest-service/complete spring-boot:run"
-  - name: init-initial-example
-    actions:
-      - type: exec
-        component: maven
-        command: "echo -e \"package hello;\n\r\n\rpublic class Greeting {\n\r\n\r}\n\r\" > /projects/gs-rest-service/initial/src/main/java/hello/Greeting.java; echo -e \"package hello;\n\rimport org.springframework.boot.SpringApplication;\n\rimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\r\n\r@SpringBootApplication\n\rpublic class Application {\n\r   public static void main(String[] args) {\n\r        SpringApplication.run(Application.class, args);\n\r    }\n\r}\" > /projects/gs-rest-service/initial/src/main/java/hello/Application.java"
   - name: run-initial-example
     actions:
       - type: exec
