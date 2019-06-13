@@ -39,12 +39,10 @@ components:
     endpoints:
       - name: '8080/tcp'
         port: 8080
-    mountSources: false
+    mountSources: true
     volumes:
       - name: m2
         containerPath: /home/user/.m2
-      - name: projects
-        containerPath: /projects
 commands:
   - name: run-complete-example
     actions:
