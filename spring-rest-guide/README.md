@@ -22,7 +22,7 @@ As the result `-Duser.home=/home/user` is not set which makes `mvn` commands not
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/LocalRepositoryNotAccessibleException
 ```
 
-Related issue [#12679](https://github.com/eclipse/che/issues/12679)
+Related issue [#12679](https://github.com/eclipse/che/issues/12679) / [#13340](https://github.com/eclipse/che/issues/13340)
 
 ## The gradle version used in that project does not work on Java 11
 
