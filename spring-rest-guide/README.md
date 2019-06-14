@@ -37,5 +37,4 @@ Could not determine java version from '11.0.4'.
 
 Related issue [#13547](https://github.com/eclipse/che/issues/13547)
 
-Potential solution would be replacing `maven:3.6.0-jdk-11` with another gradle compatible image
-
+Potential solution would be replacing `maven:3.6.0-jdk-11` with another gradle compatible java 8 image e.g `fabric8/s2i-java:3.0-java8`
