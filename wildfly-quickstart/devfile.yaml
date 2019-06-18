@@ -3,7 +3,6 @@ specVersion: 0.0.1
 name: wildfly-quickstart
 attributes:
   persistVolumes: 'false'
-  supportArbitraryUser: 'true'
 projects:
   - name: wfswarm-rest-http
     source:
@@ -58,7 +57,7 @@ commands:
       - type: exec
         component: maven
         command: "cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
-  - name: build'n'run
+  - name: build-and-run
     actions:
       - type: exec
         component: maven
