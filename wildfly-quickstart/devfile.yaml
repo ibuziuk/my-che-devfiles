@@ -57,8 +57,3 @@ commands:
       - type: exec
         component: maven
         command: "cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
-  - name: build-and-run
-    actions:
-      - type: exec
-        component: maven
-        command: "mvn -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
