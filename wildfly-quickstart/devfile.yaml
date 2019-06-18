@@ -1,0 +1,65 @@
+---
+specVersion: 0.0.1
+name: wildfly-quickstart
+attributes:
+  persistVolumes: 'false'
+  supportArbitraryUser: 'true'
+projects:
+  - name: wfswarm-rest-http
+    source:
+      type: git
+      location: 'https://github.com/wildfly-swarm-openshiftio-boosters/wfswarm-rest-http'
+components:
+  -
+    type: chePlugin
+    id: redhat/java/latest
+  -
+    type: dockerimage
+    alias: maven
+    image: fabric8/s2i-java:latest-java11
+    command: ['sleep']
+    args: ['infinity']
+    env:
+      - name: MAVEN_CONFIG
+        value: /home/user/.m2
+      - name: MAVEN_OPTS
+        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
+          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom
+          -Duser.home=/home/user"
+      - name: JAVA_OPTS
+        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
+          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
+      - name: JAVA_TOOL_OPTIONS
+        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
+          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
+      - name: PS1
+        value: $(echo ${0})\\$
+      - name: HOME
+        value: /home/user
+    memoryLimit: 512Mi
+    endpoints:
+      - name: '8080/tcp'
+        port: 8080
+    mountSources: true
+    volumes:
+      - name: m2
+        containerPath: /home/user/.m2
+commands:
+- name: build
+    actions:
+      - type: exec
+        component: maven
+        command: "mvn clean install -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http"
+- name: run
+    actions:
+      - type: exec
+        component: maven
+        command: "cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
+  - name: build'n'run
+    actions:
+      - type: exec
+        component: maven
+        command: "mvn -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"

@@ -1,0 +1,117 @@
+{
+    "v": "4.0",
+    "name": "wildfly-quickstart",
+    "workspace": {
+      "defaultEnv": "widfly",
+      "environments": {
+        "widfly": {
+          "machines": {
+            "dev-machine": {
+              "attributes": {
+                "memoryLimitBytes": "2147483648"
+              },
+              "servers": {
+                "8080/tcp": {
+                  "attributes": {},
+                  "port": "8080",
+                  "protocol": "http"
+                }
+              },
+              "volumes": {},
+              "installers": [
+                "com.redhat.oc-login",
+                "org.eclipse.che.exec",
+                "org.eclipse.che.ws-agent",
+                "com.redhat.bayesian.lsp",
+                "org.eclipse.che.ls.java",
+                "org.eclipse.che.terminal"
+              ],
+              "env": {
+                "CHE_MACHINE_NAME": "dev-machine"
+              }
+            }
+          },
+          "recipe": {
+            "type": "dockerimage",
+            "content": "registry.devshift.net/che/wildfly-swarm"
+          }
+        }
+      },
+      "projects": [
+        {
+          "links": [],
+          "name": "wfswarm-rest-http",
+          "attributes": {},
+          "type": "maven",
+          "source": {
+            "location": "https://github.com/wildfly-swarm-openshiftio-boosters/wfswarm-rest-http",
+            "type": "git",
+            "parameters": {}
+          },
+          "path": "/wfswarm-rest-http",
+          "description": "Quickstart to expose a REST Greeting endpoint using Wildfly Swarm",
+          "problems": [],
+          "mixins": []
+        }
+      ],
+      "name": "wildfly-quickstart",
+      "attributes": {
+        "persistVolumes": "false"
+      },
+      "commands": [
+        {
+          "commandLine": "MAVEN_OPTS='-Xmx100m' && scl enable rh-maven33 'mvn clean install -f ${current.project.path} -DskipTests=true' && cd ${current.project.path} && scl enable rh-maven33 'java -jar target/*-thorntail.jar'",
+          "name": "build'n'run",
+          "attributes": {
+            "goal": "Run",
+            "previewUrl": "${server.8080/tcp}"
+          },
+          "type": "custom"
+        },
+        {
+          "commandLine": "MAVEN_OPTS='-Xmx100m' && scl enable rh-maven33 'mvn clean install -f ${current.project.path} -DskipTests=true'",
+          "name": "build",
+          "attributes": {
+            "goal": "Build",
+            "previewUrl": ""
+          },
+          "type": "mvn"
+        },
+        {
+          "commandLine": "cd ${current.project.path} && scl enable rh-maven33 'java -jar target/*-thorntail.jar'",
+          "name": "run",
+          "attributes": {
+            "goal": "Run",
+            "previewUrl": "${server.8080/tcp}"
+          },
+          "type": "custom"
+        }
+      ],
+      "links": []
+    },
+    "id": "factoryuhcji9p0z72f43gc",
+    "ide": {
+      "onProjectsLoaded": {
+        "actions": [
+          {
+            "properties": {
+              "name": "build'n'run"
+            },
+            "id": "runCommand"
+          },
+          {
+            "properties": {
+              "file": "/wfswarm-rest-http/src/main/java/io/openshift/booster/GreetingEndpoint.java"
+            },
+            "id": "openFile"
+          }
+        ]
+      }
+    },
+    "creator": {
+      "name": "",
+      "email": "",
+      "created": 1531236571382,
+      "userId": ""
+    }
+  }
