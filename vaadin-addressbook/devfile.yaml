@@ -17,7 +17,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: maven:3.6.0-jdk-11
+    image: fabric8/s2i-java:latest-java11
     command: ['sleep']
     args: ['infinity']
     env:
