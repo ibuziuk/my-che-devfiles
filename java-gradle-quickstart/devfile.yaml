@@ -15,7 +15,7 @@ components:
   -
     type: dockerimage
     alias: gradle
-    image: gradle:5.4.1-jdk8
+    image: eclipse/ubuntu_gradle
     command: ['sleep']
     args: ['infinity']
     env:
