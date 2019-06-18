@@ -15,7 +15,7 @@ components:
   -
     type: dockerimage
     alias: gradle
-    image: eclipse/ubuntu_gradle
+    image: gradle:5.4.1-jdk8
     command: ['sleep']
     args: ['infinity']
     env:
@@ -41,9 +41,9 @@ commands:
     actions:
       - type: exec
         component: gradle
-        command: "cd ${CHE_PROJECTS_ROOT}/console-java-gradle && gradle build && java -jar build/libs/*.jar"
+        command: "cd console-java-gradle && gradle build && java -jar build/libs/*.jar"
   - name: build
     actions:
       - type: exec
         component: gradle
-        command: "cd ${CHE_PROJECTS_ROOT}/console-java-gradle && gradle build && java -jar build/libs/*.jar"
+        command: "cd console-java-gradle && gradle build && java -jar build/libs/*.jar"
