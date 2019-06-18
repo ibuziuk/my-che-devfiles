@@ -1,7 +1,6 @@
 ---
-apiVersion: 1.0.0
-metadata:
-  name: vaadin-addressbook
+specVersion: 0.0.1
+name: spring-rest-guide
 attributes:
   persistVolumes: 'false'
   supportArbitraryUser: 'true'
