@@ -4,7 +4,7 @@ name: java-gradle-quickstart
 attributes:
   persistVolumes: "false"
 projects:
-  - name: java-gradle-quickstart
+  - name: console-java-gradle
     source:
       type: git
       location: 'https://github.com/che-samples/console-java-gradle.git'
@@ -41,9 +41,9 @@ commands:
     actions:
       - type: exec
         component: gradle
-        command: "cd console-java-gradle && gradle build && java -jar build/libs/*.jar"
+        command: "cd ${CHE_PROJECTS_ROOT}/console-java-gradle && gradle build && java -jar build/libs/*.jar"
   - name: build
     actions:
       - type: exec
         component: gradle
-        command: "cd console-java-gradle && gradle build && java -jar build/libs/*.jar"
+        command: "cd ${CHE_PROJECTS_ROOT}/console-java-gradle && gradle build && java -jar build/libs/*.jar"
