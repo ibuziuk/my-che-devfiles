@@ -51,14 +51,14 @@ commands:
     actions:
       - type: exec
         component: maven
-        command: "mvn clean install -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http"
+        command: "MAVEN_OPTS='-Xmx100m' && mvn clean install -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http"
   - name: run
     actions:
       - type: exec
         component: maven
-        command: "cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
+        command: "MAVEN_OPTS='-Xmx100m' && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
   - name: 'build-and-run'
     actions:
       - type: exec
         component: maven
-        command: "mvn -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
+        command: "MAVEN_OPTS='-Xmx100m' && mvn clean install -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
