@@ -2,7 +2,8 @@
 specVersion: 0.0.1
 name: vaadin-addressbook
 attributes:
-  persistVolumes: "false"
+  persistVolumes: 'false'
+  supportArbitraryUser: 'true'
 projects:
   - name: addressbook
     source:
@@ -15,7 +16,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: fabric8/s2i-java:latest-java11
+    image: maven:3.6.0-jdk-11
     command: ['sleep']
     args: ['infinity']
     env:
