@@ -1,0 +1,107 @@
+{
+  "v": "4.0",
+  "name": "java-gradle-quickstart",
+  "policies": {
+    "create": "perUser"
+  },
+  "workspace": {
+    "defaultEnv": "gradle",
+    "environments": {
+      "gradle": {
+        "machines": {
+          "ws-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2097152000"
+            },
+            "servers": {},
+            "volumes": {},
+            "installers": [
+              "com.redhat.oc-login",
+              "org.eclipse.che.exec",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.ls.java",
+              "org.eclipse.che.terminal"
+            ],
+            "env": {
+              "CHE_MACHINE_NAME": "ws-machine"
+            }
+          }
+        },
+        "recipe": {
+          "type": "dockerimage",
+          "content": "eclipse/ubuntu_gradle"
+        }
+      }
+    },
+    "projects": [
+      {
+        "links": [],
+        "name": "console-java-gradle",
+        "attributes": {
+          "language": [
+            "java"
+          ]
+        },
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/che-samples/console-java-gradle.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/console-java-gradle",
+        "problems": [],
+        "mixins": [
+          "git"
+        ]
+      }
+    ],
+    "name": "java-gradle-quickstart",
+    "attributes": {
+      "persistVolumes": "false"
+    },
+    "commands": [
+      {
+        "commandLine": "cd ${current.project.path} && gradle build && java -jar build/libs/*.jar",
+        "name": "run",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd ${current.project.path} && gradle build",
+        "name": "build",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      }
+    ],
+    "links": []
+  },
+  "id": "factorydxms3luqlij4g39w",
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "name": "run"
+          },
+          "id": "runCommand"
+        },
+        {
+          "properties": {
+            "file": "/console-java-gradle/src/main/java/org/eclipse/che/examples/HelloWorld.java"
+          },
+          "id": "openFile"
+        }
+      ]
+    }
+  },
+  "creator": {
+    "name": "",
+    "email": "",
+    "created": 1531236570711,
+    "userId": ""
+  }
+}

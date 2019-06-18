@@ -1,0 +1,262 @@
+{
+    "v": "4.0",
+    "name": "spring-rest-guide",
+    "workspace": {
+      "defaultEnv": "gs-rest",
+      "environments": {
+        "gs-rest": {
+          "machines": {
+            "ws-machine": {
+              "attributes": {
+                "memoryLimitBytes": "2097152000"
+              },
+              "servers": {
+                "8080/tcp": {
+                  "attributes": {},
+                  "port": "8080",
+                  "protocol": "http"
+                }
+              },
+              "volumes": {},
+              "installers": [
+                "org.eclipse.che.terminal",
+                "org.eclipse.che.ls.java",
+                "org.eclipse.che.ws-agent",
+                "org.eclipse.che.exec",
+                "com.redhat.oc-login"
+              ],
+              "env": {
+                "CHE_MACHINE_NAME": "ws-machine"
+              }
+            }
+          },
+          "recipe": {
+            "type": "dockerimage",
+            "content": "registry.devshift.net/che/centos_jdk8"
+          }
+        }
+      },
+      "projects": [
+        {
+          "links": [],
+          "name": "initial",
+          "attributes": {
+            "maven.artifactId": [
+              "gs-rest-service"
+            ],
+            "maven.parent.version": [
+              "1.3.3.RELEASE"
+            ],
+            "maven.test.source.folder": [
+              "src/test/java"
+            ],
+            "maven.parent.groupId": [
+              "org.springframework.boot"
+            ],
+            "maven.version": [
+              "0.1.0"
+            ],
+            "languageVersion": [
+              "1.8.0_45"
+            ],
+            "language": [
+              "java"
+            ],
+            "maven.source.folder": [
+              "src/main/java"
+            ],
+            "git.repository.remotes": [
+              "https://github.com/spring-guides/gs-rest-service"
+            ],
+            "maven.groupId": [
+              "org.springframework"
+            ],
+            "maven.packaging": [
+              ""
+            ],
+            "containsJavaFiles": [
+              "false"
+            ],
+            "vcs.provider.name": [
+              "git"
+            ],
+            "git.current.branch.name": [
+              "master"
+            ],
+            "maven.parent.artifactId": [
+              "spring-boot-starter-parent"
+            ]
+          },
+          "type": "maven",
+          "source": {
+            "parameters": {}
+          },
+          "path": "/gs-rest-service/initial",
+          "problems": [],
+          "mixins": [
+            "git"
+          ]
+        },
+        {
+          "links": [],
+          "name": "complete",
+          "attributes": {
+            "maven.artifactId": [
+              "gs-rest-service"
+            ],
+            "maven.parent.version": [
+              "1.3.3.RELEASE"
+            ],
+            "maven.test.source.folder": [
+              "src/test/java"
+            ],
+            "maven.parent.groupId": [
+              "org.springframework.boot"
+            ],
+            "maven.version": [
+              "0.1.0"
+            ],
+            "languageVersion": [
+              "1.8.0_45"
+            ],
+            "language": [
+              "java"
+            ],
+            "maven.source.folder": [
+              "src/main/java"
+            ],
+            "git.repository.remotes": [
+              "https://github.com/spring-guides/gs-rest-service"
+            ],
+            "maven.groupId": [
+              "org.springframework"
+            ],
+            "maven.packaging": [
+              ""
+            ],
+            "containsJavaFiles": [
+              "true"
+            ],
+            "vcs.provider.name": [
+              "git"
+            ],
+            "git.current.branch.name": [
+              "master"
+            ],
+            "maven.parent.artifactId": [
+              "spring-boot-starter-parent"
+            ]
+          },
+          "type": "maven",
+          "source": {
+            "parameters": {}
+          },
+          "path": "/gs-rest-service/complete",
+          "problems": [],
+          "mixins": [
+            "git"
+          ]
+        },
+        {
+          "links": [],
+          "name": "gs-rest-service",
+          "attributes": {
+            "vcs.provider.name": [
+              "git"
+            ],
+            "git.current.branch.name": [
+              "master"
+            ],
+            "git.repository.remotes": [
+              "https://github.com/spring-guides/gs-rest-service"
+            ]
+          },
+          "type": "blank",
+          "source": {
+            "location": "https://github.com/spring-guides/gs-rest-service",
+            "type": "git",
+            "parameters": {}
+          },
+          "path": "/gs-rest-service",
+          "description": "",
+          "problems": [],
+          "mixins": [
+            "git"
+          ]
+        }
+      ],
+      "name": "spring-rest-guide",
+      "attributes": {
+        "persistVolumes": "false"
+      },
+      "commands": [
+        {
+          "commandLine": "mvn -f /projects/gs-rest-service/complete spring-boot:run",
+          "name": "complete example :: run",
+          "attributes": {
+            "previewUrl": "${server.8080/tcp}/greeting"
+          },
+          "type": "mvn"
+        },
+        {
+          "commandLine": "echo -e \"package hello;\n\r\n\rpublic class Greeting {\n\r\n\r}\n\r\" > /projects/gs-rest-service/initial/src/main/java/hello/Greeting.java; echo -e \"package hello;\n\rimport org.springframework.boot.SpringApplication;\n\rimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\r\n\r@SpringBootApplication\n\rpublic class Application {\n\r   public static void main(String[] args) {\n\r        SpringApplication.run(Application.class, args);\n\r    }\n\r}\" > /projects/gs-rest-service/initial/src/main/java/hello/Application.java",
+          "name": "initial example :: init",
+          "attributes": {
+            "previewUrl": ""
+          },
+          "type": "custom"
+        },
+        {
+          "commandLine": "mvn -f /projects/gs-rest-service/initial spring-boot:run",
+          "name": "initial example :: run",
+          "attributes": {
+            "previewUrl": "${server.8080/tcp}/greeting"
+          },
+          "type": "mvn"
+        }
+      ],
+      "links": []
+    },
+    "id": "factory9ppesf180lud4qdh",
+    "ide": {
+      "onAppLoaded": {
+        "actions": [
+          {
+            "properties": {
+              "greetingTitle": "Getting Started",
+              "greetingContentUrl": "https://spring.io/guides/gs/rest-service/"
+            },
+            "id": "openWelcomePage"
+          }
+        ]
+      },
+      "onProjectsLoaded": {
+        "actions": [
+          {
+            "properties": {
+              "name": "initial example :: init"
+            },
+            "id": "runCommand"
+          },
+          {
+            "properties": {
+              "file": "/gs-rest-service/complete/src/main/java/hello/Greeting.java"
+            },
+            "id": "openFile"
+          },
+          {
+            "properties": {
+              "name": "complete example :: run"
+            },
+            "id": "runCommand"
+          }
+        ]
+      }
+    },
+    "creator": {
+      "name": "",
+      "email": "",
+      "created": 1531236569144,
+      "userId": ""
+    }
+  }

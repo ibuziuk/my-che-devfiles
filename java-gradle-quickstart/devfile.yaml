@@ -1,0 +1,49 @@
+---
+specVersion: 0.0.1
+name: java-gradle-quickstart
+attributes:
+  persistVolumes: "false"
+projects:
+  - name: java-gradle-quickstart
+    source:
+      type: git
+      location: 'https://github.com/che-samples/console-java-gradle.git'
+components:
+  -
+    type: chePlugin
+    id: redhat/java/latest
+  -
+    type: dockerimage
+    alias: gradle
+    image: eclipse/ubuntu_gradle
+    command: ['sleep']
+    args: ['infinity']
+    env:
+      - name: JAVA_OPTS
+        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
+          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
+      - name: JAVA_TOOL_OPTIONS
+        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
+          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
+      - name: PS1
+        value: $(echo ${0})\\$
+      - name: HOME
+        value: /home/user
+    memoryLimit: 512Mi
+    endpoints:
+      - name: '8080/tcp'
+        port: 8080
+    mountSources: true
+commands:
+  - name: run
+    actions:
+      - type: exec
+        component: gradle
+        command: "cd ${CHE_PROJECTS_ROOT}/console-java-gradle && gradle build && java -jar build/libs/*.jar"
+  - name: build
+    actions:
+      - type: exec
+        component: gradle
+        command: "cd ${CHE_PROJECTS_ROOT}/console-java-gradle && gradle build && java -jar build/libs/*.jar"
