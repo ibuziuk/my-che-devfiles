@@ -1,6 +1,6 @@
 ---
 specVersion: 0.0.1
-name: spring-rest-guide
+name: vaadin-addressbook
 attributes:
   persistVolumes: 'false'
   supportArbitraryUser: 'true'
@@ -8,7 +8,7 @@ projects:
   - name: addressbook
     source:
       type: git
-      location: 'https://github.com/vaadin/addressbook'
+      location: 'https://github.com/vaadin/addressbook.git'
 components:
   -
     type: chePlugin
