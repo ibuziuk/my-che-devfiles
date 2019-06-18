@@ -1,0 +1,148 @@
+{
+    "v": "4.0",
+    "name": "vaadin-addressbook",
+    "workspace": {
+      "defaultEnv": "vaadin",
+      "environments": {
+        "vaadin": {
+          "machines": {
+            "ws-machine": {
+              "attributes": {
+                "memoryLimitBytes": "2097152000"
+              },
+              "servers": {
+                "8080/tcp": {
+                  "attributes": {},
+                  "port": "8080",
+                  "protocol": "http"
+                }
+              },
+              "volumes": {},
+              "installers": [
+                "com.redhat.oc-login",
+                "org.eclipse.che.exec",
+                "org.eclipse.che.ws-agent",
+                "org.eclipse.che.ls.java",
+                "org.eclipse.che.terminal"
+              ],
+              "env": {
+                "CHE_MACHINE_NAME": "ws-machine"
+              }
+            }
+          },
+          "recipe": {
+            "type": "dockerimage",
+            "content": "registry.devshift.net/che/centos_jdk8"
+          }
+        }
+      },
+      "projects": [
+        {
+          "links": [],
+          "name": "addressbook",
+          "attributes": {
+            "maven.artifactId": [
+              "addressbook"
+            ],
+            "maven.test.source.folder": [
+              "src/test/java"
+            ],
+            "maven.parent.version": [
+              ""
+            ],
+            "maven.version": [
+              "2.0"
+            ],
+            "maven.parent.groupId": [
+              ""
+            ],
+            "languageVersion": [
+              "1.8.0_45"
+            ],
+            "language": [
+              "java"
+            ],
+            "contribute_to_branch": [
+              "master"
+            ],
+            "maven.source.folder": [
+              "src/main/java"
+            ],
+            "git.repository.remotes": [
+              "https://github.com/vaadin/addressbook"
+            ],
+            "maven.groupId": [
+              "com.vaadin.tutorial"
+            ],
+            "maven.packaging": [
+              "war"
+            ],
+            "containsJavaFiles": [
+              "true"
+            ],
+            "vcs.provider.name": [
+              "git"
+            ],
+            "git.current.branch.name": [
+              "master"
+            ],
+            "maven.parent.artifactId": [
+              ""
+            ]
+          },
+          "type": "maven",
+          "source": {
+            "location": "https://github.com/vaadin/addressbook",
+            "type": "git",
+            "parameters": {}
+          },
+          "path": "/addressbook",
+          "problems": [],
+          "mixins": [
+            "pullrequest",
+            "git"
+          ]
+        }
+      ],
+      "name": "vaadin-addressbook",
+      "attributes": {
+        "persistVolumes": "false"
+      },
+      "commands": [
+        {
+          "commandLine": "mvn -f ${current.project.path} jetty:run",
+          "name": "run",
+          "attributes": {
+            "previewUrl": "${server.8080/tcp}"
+          },
+          "type": "mvn"
+        }
+      ],
+      "links": []
+    },
+    "id": "factory15l904ynu8vbd3dr",
+    "ide": {
+      "onProjectsLoaded": {
+        "actions": [
+          {
+            "properties": {
+              "name": "run"
+            },
+            "id": "runCommand"
+          },
+          {
+            "properties": {
+              "file": "/addressbook/README.md"
+            },
+            "id": "openFile"
+          }
+        ]
+      }
+    },
+    "creator": {
+      "name": "",
+      "email": "",
+      "created": 1531236570800,
+      "userId": ""
+    }
+  }
