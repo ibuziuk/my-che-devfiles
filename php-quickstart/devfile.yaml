@@ -1,0 +1,54 @@
+---
+specVersion: 0.0.1
+name: java-gradle-quickstart
+attributes:
+  persistVolumes: "false"
+projects:
+  -
+    name: web-php-simple
+    source:
+      type: git
+      location: "https://github.com/che-samples/web-php-simple.git"
+components:
+  -
+    type: chePlugin
+    id: redhat/php/latest
+  -
+    type: dockerimage
+    alias: php
+    image: registry.access.redhat.com/ubi8/php-72
+    command: ['sleep']
+    args: ['infinity']
+    env:
+      - name: PS1
+        value: "$(echo ${0})\\$ "
+      - name: HOME
+        value: /home/user
+    memoryLimit: 512Mi
+    endpoints:
+      - name: '8080/tcp'
+        port: 8080
+    mountSources: true
+commands:
+  -
+    name: start apache
+    actions:
+      -
+        type: exec
+        command: "service apache2 start && tail -f /var/log/apache2/access.log -f /var/log/apache2/error.log"
+        component: php
+  -
+    name: stop-apache
+    actions:
+      -
+        type: exec
+        command: "service apache2 stop"
+        component: php
+  -
+    name: restart-apache
+    actions:
+      -
+        type: exec
+        command: "service apache2 restart"
+        component: php
+
