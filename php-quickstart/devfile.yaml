@@ -1,6 +1,6 @@
 ---
 specVersion: 0.0.1
-name: java-gradle-quickstart
+name: php-quickstart
 attributes:
   persistVolumes: "false"
 projects:
