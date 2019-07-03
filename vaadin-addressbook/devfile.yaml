@@ -16,7 +16,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: quay.io/eclipse-che/che7-java8-maven
+    image: quay.io/eclipse-che/che7-java11-maven
     command: ['sleep']
     args: ['infinity']
     env:
