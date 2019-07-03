@@ -16,7 +16,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: fabric8/s2i-java:latest-java11
+    image: quay.io/eclipse-che/che7-java11-maven
     command: ['sleep']
     args: ['infinity']
     env:
