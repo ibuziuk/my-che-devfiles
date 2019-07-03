@@ -16,7 +16,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: quay.io/eclipse-che/che7-java11-maven
+    image: quay.io/eclipse-che/che7-java8-maven
     command: ['sleep']
     args: ['infinity']
     env:
@@ -57,4 +57,4 @@ commands:
     actions:
       - type: exec
         component: maven
-        command: "mvn -f ${CHE_PROJECTS_ROOT}/addressbook jetty:stop"
+        command: "mvn -f ${CHE_PROJECTS_ROOT}/addressbook jetty:stop -DSTOP.PORT=8080 -DSTOP.KEY=stop"
