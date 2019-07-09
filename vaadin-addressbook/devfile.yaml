@@ -17,8 +17,6 @@ components:
     type: dockerimage
     alias: maven
     image: quay.io/eclipse-che/che7-java11-maven
-    command: ['sleep']
-    args: ['infinity']
     env:
       - name: MAVEN_CONFIG
         value: /home/user/.m2
@@ -35,10 +33,6 @@ components:
         value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
           -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
           -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
-      - name: PS1
-        value: $(echo ${0})\\$
-      - name: HOME
-        value: /home/user
     memoryLimit: 512Mi
     endpoints:
       - name: '8080/tcp'
