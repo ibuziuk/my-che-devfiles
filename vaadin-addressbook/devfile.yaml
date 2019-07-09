@@ -47,8 +47,3 @@ commands:
       - type: exec
         component: maven
         command: "mvn -f ${CHE_PROJECTS_ROOT}/addressbook jetty:run"
-  - name: stop
-    actions:
-      - type: exec
-        component: maven
-        command: "mvn -f ${CHE_PROJECTS_ROOT}/addressbook jetty:stop -DSTOP.PORT=8080 -DSTOP.KEY=stop"
