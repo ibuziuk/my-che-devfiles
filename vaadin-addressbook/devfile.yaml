@@ -40,7 +40,7 @@ components:
     mountSources: true
     volumes:
       - name: m2
-        containerPath: /home/user/.m2
+        containerPath: ${HOME}/.m2
 commands:
   - name: run
     actions:
