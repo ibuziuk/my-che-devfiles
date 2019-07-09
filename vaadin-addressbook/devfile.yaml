@@ -3,7 +3,6 @@ specVersion: 0.0.1
 name: vaadin-addressbook
 attributes:
   persistVolumes: 'false'
-  supportArbitraryUser: 'true'
 projects:
   - name: addressbook
     source:
