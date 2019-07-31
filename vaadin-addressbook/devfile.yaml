@@ -1,6 +1,7 @@
 ---
-specVersion: 0.0.1
-name: vaadin-addressbook
+apiVersion: 1.0.0
+metadata:
+  name: vaadin-addressbook
 attributes:
   persistVolumes: 'false'
 projects:
@@ -15,7 +16,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: quay.io/eclipse-che/che7-java11-maven
+    image: quay.io/eclipse/che-java11-maven:nightly
     env:
       - name: MAVEN_CONFIG
         value: /home/user/.m2
