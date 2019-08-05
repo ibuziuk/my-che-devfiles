@@ -51,4 +51,4 @@ commands:
     actions:
       - type: exec
         component: maven
-        command: "kill $(pidof java)"
+        command: "echo 'Stopping the application...' && kill $(pidof java) && echo 'The application has been successfully stopped'"
