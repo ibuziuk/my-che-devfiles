@@ -1,1 +1,1 @@
-[![Contribute](https://che.openshift.io/factory/resources/factory-contribute.svg)](https://che.openshift.io/f?url=https://raw.githubusercontent.com/ibuziuk/my-che-devfiles/master/java-gradle-quickstart/devfile.yaml)
+[![Contribute](https://che.openshift.io/factory/resources/factory-contribute.svg)](https://che.prod-preview.openshift.io/f?url=https://raw.githubusercontent.com/ibuziuk/my-che-devfiles/master/java-gradle-quickstart/devfile.yaml)
