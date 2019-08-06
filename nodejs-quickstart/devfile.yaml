@@ -1,6 +1,7 @@
 ---
-specVersion: 0.0.1
-name: nodejs
+apiVersion: 1.0.0
+metadata:
+  name: nodejs
 attributes:
   persistVolumes: "false"
 projects:
@@ -17,23 +18,31 @@ components:
   -
     type: dockerimage
     alias: nodejs
-    image: registry.access.redhat.com/ubi8/nodejs-10
-    command: ['sleep']
-    args: ['infinity']
-    env:
-      - name: HOME
-        value: /home/user
-      - name: PS1
-        value: $(echo ${0})\\$
+    image: quay.io/eclipse/che-nodejs10-ubi:nightly
     memoryLimit: 512Mi
     endpoints:
       - name: 'nodejs'
         port: 3000
     mountSources: true
 commands:
-  -
-    name: run
+  - 
+    name: run the web app
     actions:
       - type: exec
         component: nodejs
-        command: cd ${CHE_PROJECTS_ROOT}/nodejs-web-app/app && nodemon app.js
+        command: >-
+          if [ ! -d 'node_modules' ]; then
+            echo 'Install node dependencies...';
+            npm install; 
+          fi;
+          nodemon app/app.js
+        workdir: '${CHE_PROJECTS_ROOT}/nodejs-web-app'
+  - 
+    name: stop the web app
+    actions:
+      - type: exec
+        component: nodejs
+        command: >-
+          node_server_pid=$(pgrep -fx '.*nodemon app/app.js' | tr "\\n" " ") &&
+          echo "Stopping node server with PIDs: ${node_server_pid}" && 
+          kill -15 ${node_server_pid} &>/dev/null && echo 'Done.'
