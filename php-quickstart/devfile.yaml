@@ -1,54 +1,51 @@
 ---
-specVersion: 0.0.1
-name: php-quickstart
+apiVersion: 1.0.0
+metadata:
+  name: php-web-simple
 attributes:
-  persistVolumes: "false"
+  persistVolumes: 'false'
 projects:
-  -
-    name: web-php-simple
+-
+    name: php-web-simple
     source:
-      type: git
-      location: "https://github.com/che-samples/web-php-simple.git"
+        type: git
+        location: "https://github.com/che-samples/web-php-simple"
 components:
-  -
-    type: chePlugin
-    id: redhat/php/latest
-  -
-    type: dockerimage
-    alias: php
-    image: registry.access.redhat.com/ubi8/php-72
-    command: ['sleep']
-    args: ['infinity']
-    env:
-      - name: PS1
-        value: "$(echo ${0})\\$ "
-      - name: HOME
-        value: /home/user
-    memoryLimit: 512Mi
-    endpoints:
-      - name: '8080/tcp'
-        port: 8080
-    mountSources: true
+-
+  type: chePlugin
+  id: redhat/php/latest
+  memoryLimit: 1Gi
+-
+  type: chePlugin
+  id: redhat/php-debugger/latest
+  memoryLimit: 256Mi
+-
+  type: dockerimage
+  alias: php
+  image: quay.io/eclipse/che-php-7:nightly
+  memoryLimit: 512Mi
+  mountSources: true
+  volumes:
+    - name: composer
+      containerPath: "/home/user/.composer"
+    - name: symfony
+      containerPath: "/home/user/.symfony"
 commands:
-  -
-    name: start apache
+-
+    name: Start Apache Web Server
     actions:
-      -
-        type: exec
-        command: "service apache2 start && tail -f /var/log/apache2/access.log -f /var/log/apache2/error.log"
-        component: php
-  -
-    name: stop-apache
+    - type: exec
+      component: php
+      command: "service apache2 start"
+-
+    name: Stop Apache Web Server
     actions:
-      -
-        type: exec
-        command: "service apache2 stop"
-        component: php
-  -
-    name: restart-apache
+    - type: exec
+      component: php
+      command: "service apache2 stop"
+-
+    name: Restart Apache Web Server
     actions:
-      -
-        type: exec
-        command: "service apache2 restart"
-        component: php
-
+    - type: exec
+      component: php
+      command: "service apache2 restart"
