@@ -49,15 +49,7 @@ commands:
       -
         type: exec
         component: maven
-        command: "mvn clean install"
-        workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
-  -
-    name: run
-    actions:
-      -
-        type: exec
-        component: maven
-        command: "java -jar target/*-thorntail.jar"
+        command: "mvn clean install -DskipTests=true"
         workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
   -
     name: build and run
@@ -65,5 +57,5 @@ commands:
       -
         type: exec
         component: maven
-        command: "mvn clean install && java -jar target/*-thorntail.jar"
+        command: "mvn clean install -DskipTests=true && java -jar target/*-thorntail.jar"
         workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
