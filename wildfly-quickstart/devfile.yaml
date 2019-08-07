@@ -1,13 +1,15 @@
 ---
-specVersion: 0.0.1
-name: wildfly-quickstart
+apiVersion: 1.0.0
+metadata:
+  name: wfswarm-rest-http
 attributes:
   persistVolumes: 'false'
 projects:
-  - name: wfswarm-rest-http
+  -
+    name: wfswarm-rest-http
     source:
       type: git
-      location: 'https://github.com/wildfly-swarm-openshiftio-boosters/wfswarm-rest-http'
+      location: "https://github.com/wildfly-swarm-openshiftio-boosters/wfswarm-rest-http"
 components:
   -
     type: chePlugin
@@ -15,9 +17,7 @@ components:
   -
     type: dockerimage
     alias: maven
-    image: fabric8/s2i-java:latest-java11
-    command: ['sleep']
-    args: ['infinity']
+    image: quay.io/eclipse/che-java11-maven:nightly
     env:
       - name: MAVEN_CONFIG
         value: /home/user/.m2
@@ -34,10 +34,6 @@ components:
         value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
           -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
           -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
-      - name: PS1
-        value: $(echo ${0})\\$
-      - name: HOME
-        value: /home/user
     memoryLimit: 512Mi
     endpoints:
       - name: '8080/tcp'
@@ -47,18 +43,27 @@ components:
       - name: m2
         containerPath: /home/user/.m2
 commands:
-  - name: build
+  -
+    name: build
     actions:
-      - type: exec
+      -
+        type: exec
         component: maven
-        command: "MAVEN_OPTS='-Xmx100m' && mvn clean install -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http"
-  - name: run
+        command: "mvn clean install"
+        workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
+  -
+    name: run
     actions:
-      - type: exec
+      -
+        type: exec
         component: maven
-        command: "MAVEN_OPTS='-Xmx100m' && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
-  - name: 'build-and-run'
+        command: "java -jar target/*-thorntail.jar"
+        workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
+  -
+    name: build and run
     actions:
-      - type: exec
+      -
+        type: exec
         component: maven
-        command: "MAVEN_OPTS='-Xmx100m' && mvn clean install -f ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && cd ${CHE_PROJECTS_ROOT}/wfswarm-rest-http && java -jar target/*-thorntail.jar"
+        command: "mvn clean install && java -jar target/*-thorntail.jar"
+        workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
