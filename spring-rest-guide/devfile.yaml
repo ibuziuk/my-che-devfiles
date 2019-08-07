@@ -1,44 +1,33 @@
 ---
-specVersion: 0.0.1
-name: spring-rest-guide
+apiVersion: 1.0.0
+metadata:
+  name: spring-rest-guide
 attributes:
-  persistVolumes: "false"
+  persistVolumes: 'false'
 projects:
-  - name: gs-rest-service
+  -
+    name: spring-rest-guide
     source:
       type: git
-      location: 'https://github.com/spring-guides/gs-rest-service'
+      location: "https://github.com/spring-guides/gs-rest-service.git"
 components:
   -
     type: chePlugin
     id: redhat/java/latest
+    memoryLimit: 1512Mi
   -
     type: dockerimage
-    alias: maven
-    image: maven:3.6.0-jdk-11
-    command: ['sleep']
-    args: ['infinity']
+    alias: tools
+    image: quay.io/eclipse/che-java8-maven:nightly
     env:
-      - name: MAVEN_CONFIG
-        value: /home/user/.m2
-      - name: MAVEN_OPTS
-        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
+      - name: JAVA_OPTS
+        value: "-XX:MaxRAMPercentage=50.0 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
           -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
           -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom
           -Duser.home=/home/user"
-      - name: JAVA_OPTS
-        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
-          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
-          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
-      - name: JAVA_TOOL_OPTIONS
-        value: "-XX:MaxRAMPercentage=50 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10
-          -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
-          -Dsun.zip.disableMemoryMapping=true -Xms20m -Djava.security.egd=file:/dev/./urandom"
-      - name: PS1
-        value: $(echo ${0})\\$
-      - name: HOME
-        value: /home/user
-    memoryLimit: 512Mi
+      - name: MAVEN_OPTS
+        value: $(JAVA_OPTS)
+    memoryLimit: 768Mi
     endpoints:
       - name: '8080/tcp'
         port: 8080
@@ -47,13 +36,35 @@ components:
       - name: m2
         containerPath: /home/user/.m2
 commands:
-  - name: run-complete-example
+  -
+    name: maven build
     actions:
-      - type: exec
-        component: maven
-        command: "mvn -f ${CHE_PROJECTS_ROOT}/gs-rest-service/complete spring-boot:run"
-  - name: run-initial-example
+      -
+        type: exec
+        component: tools
+        command: "mvn clean install"
+        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide
+  - name: run webapp
     actions:
-      - type: exec
-        component: maven
-        command: "mvn -f ${CHE_PROJECTS_ROOT}/gs-rest-service/initial spring-boot:run"
+      -
+        type: exec
+        component: tools
+        command: |
+          java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 \
+          target/*.jar
+        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide
+  - name: Debug remote java application
+    actions:
+      - type: vscode-launch
+        referenceContent: |
+          {
+          "version": "0.2.0",
+          "configurations": [
+            {
+              "type": "java",
+              "name": "Debug (Attach) - Remote",
+              "request": "attach",
+              "hostName": "localhost",
+              "port": 5005
+            }]
+          }
