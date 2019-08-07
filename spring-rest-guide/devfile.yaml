@@ -43,7 +43,7 @@ commands:
         type: exec
         component: tools
         command: "mvn clean install"
-        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide
+        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide/complete
   - name: run webapp
     actions:
       -
@@ -52,7 +52,7 @@ commands:
         command: |
           java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 \
           target/*.jar
-        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide
+        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide/complete
   - name: Debug remote java application
     actions:
       - type: vscode-launch
