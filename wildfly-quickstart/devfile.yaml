@@ -59,3 +59,10 @@ commands:
         component: maven
         command: "mvn clean install -DskipTests=true && java -jar target/*-thorntail.jar"
         workdir: ${CHE_PROJECTS_ROOT}/wfswarm-rest-http
+  -
+    name: stop
+    actions:
+      -
+        type: exec
+        component: maven
+        command: "echo 'Stopping the application...' && kill $(pidof java) && echo 'The application has been successfully stopped'"
