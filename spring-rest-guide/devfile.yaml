@@ -49,6 +49,13 @@ commands:
       -
         type: exec
         component: tools
+        command: "mvn spring-boot:run"
+        workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide/complete
+  - name: run webapp (debug mode)
+    actions:
+      -
+        type: exec
+        component: tools
         command: |
           java -jar -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 \
           target/*.jar
