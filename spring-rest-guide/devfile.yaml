@@ -51,6 +51,12 @@ commands:
         component: tools
         command: "mvn spring-boot:run"
         workdir: ${CHE_PROJECTS_ROOT}/spring-rest-guide/complete
+  - name: stop webapp
+    actions:
+      -
+        type: exec
+        component: tools
+        command: "echo 'Stopping the application...' && kill $(pidof java) && echo 'The application has been successfully stopped'"
   - name: run webapp (debug mode)
     actions:
       -
