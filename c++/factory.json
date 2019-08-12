@@ -1,0 +1,78 @@
+{
+    "v": "4.0",
+    "name": "cpp-quickstart",
+    "workspace": {
+        "defaultEnv": "cpp",
+        "environments": {
+            "cpp": {
+                "machines": {
+                    "ws-machine": {
+                        "attributes": {
+                            "memoryLimitBytes": "2097152000"
+                        },
+                        "installers": [
+                            "org.eclipse.che.terminal",
+                            "org.eclipse.che.ws-agent",
+                            "org.eclipse.che.exec",
+                            "com.redhat.oc-login"
+                        ],
+                        "env": {
+                            "CHE_MACHINE_NAME": "ws-machine"
+                        }
+                    }
+                },
+                "recipe": {
+                    "type": "dockerimage",
+                    "content": "eclipse/cpp_gcc"
+                }
+            }
+        },
+        "projects": [
+            {
+                "name": "console-cpp-simple",
+                "type": "blank",
+                "source": {
+                    "location": "https://github.com/che-samples/console-cpp-simple.git",
+                    "type": "git"
+                },
+                "path": "/console-cpp-simple",
+                "description": "",
+                "mixins": [
+                    "git"
+                ]
+            }
+        ],
+        "name": "cpp-quickstart",
+        "attributes": {
+            "persistVolumes": "false"
+        },
+        "commands": [
+            {
+                "commandLine": "cd ${current.project.path} && make && ./a.out",
+                "name": "run",
+                "attributes": {
+                    "previewUrl": ""
+                },
+                "type": "custom"
+            }
+        ]
+    },
+    "ide": {
+        "onProjectsLoaded": {
+            "actions": [
+                {
+                    "properties": {
+                        "name": "run"
+                    },
+                    "id": "runCommand"
+                },
+                {
+                    "properties": {
+                        "file": "/console-cpp-simple/hello.cc"
+                    },
+                    "id": "openFile"
+                }
+            ]
+        }
+    }
+}

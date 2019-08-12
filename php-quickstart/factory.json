@@ -1,121 +1,114 @@
 {
-    "v": "4.0",
-    "name": "php-quickstart",
-    "policies": {
-      "create": "perUser"
-    },
-    "workspace": {
-      "defaultEnv": "php",
-      "environments": {
-        "php": {
-          "machines": {
-            "ws-machine": {
-              "attributes": {
-                "memoryLimitBytes": "2097152000"
-              },
-              "servers": {
-                "80/tcp": {
-                  "attributes": {},
-                  "port": "80",
-                  "protocol": "http"
-                }
-              },
-              "volumes": {},
-              "installers": [
-                "org.eclipse.che.terminal",
-                "org.eclipse.che.ws-agent",
-                "org.eclipse.che.exec",
-                "org.eclipse.che.ls.php",
-                "com.redhat.oc-login"
-              ],
-              "env": {
-                "CHE_MACHINE_NAME": "ws-machine"
+  "v": "4.0",
+  "name": "php-quickstart",
+  "policies": {
+    "create": "perUser"
+  },
+  "workspace": {
+    "defaultEnv": "php",
+    "environments": {
+      "php": {
+        "machines": {
+          "ws-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2097152000"
+            },
+            "servers": {
+              "80/tcp": {
+                "attributes": {},
+                "port": "80",
+                "protocol": "http"
               }
+            },
+            "volumes": {},
+            "installers": [
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.exec",
+              "org.eclipse.che.ls.php",
+              "com.redhat.oc-login"
+            ],
+            "env": {
+              "CHE_MACHINE_NAME": "ws-machine"
             }
-          },
-          "recipe": {
-            "type": "dockerimage",
-            "content": "eclipse/php"
           }
-        }
-      },
-      "projects": [
-        {
-          "links": [],
-          "name": "web-php-simple",
-          "attributes": {
-            "language": [
-              "java"
-            ]
-          },
-          "type": "java",
-          "source": {
-            "location": "https://github.com/che-samples/web-php-simple.git",
-            "type": "git",
-            "parameters": {}
-          },
-          "path": "/web-php-simple",
-          "problems": [],
-          "mixins": [
-            "git"
-          ]
-        }
-      ],
-      "name": "php-quickstart",
-      "attributes": {
-        "persistVolumes": "false"
-      },
-      "commands": [
-        {
-          "commandLine": "service apache2 restart",
-          "name": "web-php-simple: restart apache",
-          "attributes": {
-            "previewUrl": "${server.80/tcp}/${current.project.relpath}"
-          },
-          "type": "custom"
         },
-        {
-          "commandLine": "service apache2 stop",
-          "name": "web-php-simple: stop apache",
-          "attributes": {
-            "previewUrl": ""
-          },
-          "type": "custom"
-        },
-        {
-          "commandLine": "service apache2 start && tail -f /var/log/apache2/access.log -f /var/log/apache2/error.log",
-          "name": "web-php-simple: start apache",
-          "attributes": {
-            "previewUrl": "${server.80/tcp}/${current.project.relpath}"
-          },
-          "type": "custom"
+        "recipe": {
+          "type": "dockerimage",
+          "content": "eclipse/php"
         }
-      ],
-      "links": []
-    },
-    "id": "factory8wsgnw5wrtquffer",
-    "ide": {
-      "onProjectsLoaded": {
-        "actions": [
-          {
-            "properties": {
-              "file": "/web-php-simple/index.php"
-            },
-            "id": "openFile"
-          },
-          {
-            "properties": {
-              "name": "web-php-simple: start apache"
-            },
-            "id": "runCommand"
-          }
-        ]
       }
     },
-    "creator": {
-      "name": "",
-      "email": "",
-      "created": 1531236571547,
-      "userId": ""
+    "projects": [
+      {
+        "links": [],
+        "name": "web-php-simple",
+        "attributes": {
+          "language": [
+            "java"
+          ]
+        },
+        "type": "java",
+        "source": {
+          "location": "https://github.com/che-samples/web-php-simple.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/web-php-simple",
+        "problems": [],
+        "mixins": [
+          "git"
+        ]
+      }
+    ],
+    "name": "php-quickstart",
+    "attributes": {
+      "persistVolumes": "false"
+    },
+    "commands": [
+      {
+        "commandLine": "service apache2 restart",
+        "name": "web-php-simple: restart apache",
+        "attributes": {
+          "previewUrl": "${server.80/tcp}/${current.project.relpath}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "service apache2 stop",
+        "name": "web-php-simple: stop apache",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "service apache2 start && tail -f /var/log/apache2/access.log -f /var/log/apache2/error.log",
+        "name": "web-php-simple: start apache",
+        "attributes": {
+          "previewUrl": "${server.80/tcp}/${current.project.relpath}"
+        },
+        "type": "custom"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "file": "/web-php-simple/index.php"
+          },
+          "id": "openFile"
+        },
+        {
+          "properties": {
+            "name": "web-php-simple: start apache"
+          },
+          "id": "runCommand"
+        }
+      ]
     }
   }
+}

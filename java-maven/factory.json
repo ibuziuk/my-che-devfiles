@@ -1,0 +1,111 @@
+{
+    "v": "4.0",
+    "name": "java-maven-quickstart",
+    "workspace": {
+        "defaultEnv": "java",
+        "environments": {
+            "java": {
+                "machines": {
+                    "ws-machine": {
+                        "attributes": {
+                            "memoryLimitBytes": "2097152000"
+                        },
+                        "installers": [
+                            "com.redhat.oc-login",
+                            "org.eclipse.che.exec",
+                            "org.eclipse.che.ws-agent",
+                            "org.eclipse.che.terminal"
+                        ],
+                        "env": {
+                            "CHE_MACHINE_NAME": "ws-machine"
+                        }
+                    }
+                },
+                "recipe": {
+                    "type": "dockerimage",
+                    "content": "registry.devshift.net/che/centos_jdk8"
+                }
+            }
+        },
+        "projects": [
+            {
+                "name": "console-java-simple",
+                "attributes": {
+                    "maven.artifactId": [
+                        "console-java-simple"
+                    ],
+                    "maven.packaging": [
+                        "jar"
+                    ],
+                    "vcs.provider.name": [
+                        "git"
+                    ],
+                    "maven.version": [
+                        "1.0-SNAPSHOT"
+                    ],
+                    "git.current.branch.name": [
+                        "master"
+                    ],
+                    "language": [
+                        "java"
+                    ],
+                    "git.repository.remotes": [
+                        "https://github.com/che-samples/console-java-simple.git"
+                    ],
+                    "maven.groupId": [
+                        "org.eclipse.che.examples"
+                    ]
+                },
+                "type": "maven",
+                "source": {
+                    "location": "https://github.com/che-samples/console-java-simple.git",
+                    "type": "git"
+                },
+                "path": "/console-java-simple",
+                "mixins": [
+                    "git"
+                ]
+            }
+        ],
+        "name": "java-maven-quickstart",
+        "attributes": {
+            "persistVolumes": "false"
+        },
+        "commands": [
+            {
+                "commandLine": "mvn -f ${current.project.path} clean install",
+                "name": "console-java-simple: build",
+                "attributes": {
+                    "previewUrl": ""
+                },
+                "type": "mvn"
+            },
+            {
+                "commandLine": "mvn -f ${current.project.path} clean install && java -jar ${current.project.path}/target/*.jar",
+                "name": "console-java-simple: run",
+                "attributes": {
+                    "previewUrl": ""
+                },
+                "type": "mvn"
+            }
+        ]
+    },
+    "ide": {
+        "onProjectsLoaded": {
+            "actions": [
+                {
+                    "properties": {
+                        "name": "console-java-simple: run"
+                    },
+                    "id": "runCommand"
+                },
+                {
+                    "properties": {
+                        "file": "/console-java-simple/src/main/java/org/eclipse/che/examples/HelloWorld.java"
+                    },
+                    "id": "openFile"
+                }
+            ]
+        }
+    }
+}

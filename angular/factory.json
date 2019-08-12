@@ -1,120 +1,113 @@
 {
-    "v": "4.0",
-    "name": "angular2-quickstart",
-    "policies": {
-      "create": "perUser"
-    },
-    "workspace": {
-      "defaultEnv": "node",
-      "environments": {
-        "node": {
-          "machines": {
-            "ws-machine": {
-              "attributes": {
-                "memoryLimitBytes": "2097152000"
-              },
-              "servers": {
-                "3000/tcp": {
-                  "attributes": {},
-                  "port": "3000",
-                  "protocol": "http"
-                }
-              },
-              "volumes": {},
-              "installers": [
-                "org.eclipse.che.terminal",
-                "org.eclipse.che.ws-agent",
-                "org.eclipse.che.exec",
-                "com.redhat.oc-login"
-              ],
-              "env": {
-                "CHE_MACHINE_NAME": "ws-machine"
+  "v": "4.0",
+  "name": "angular2-quickstart",
+  "policies": {
+    "create": "perUser"
+  },
+  "workspace": {
+    "defaultEnv": "node",
+    "environments": {
+      "node": {
+        "machines": {
+          "ws-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2097152000"
+            },
+            "servers": {
+              "3000/tcp": {
+                "attributes": {},
+                "port": "3000",
+                "protocol": "http"
               }
+            },
+            "volumes": {},
+            "installers": [
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.exec",
+              "com.redhat.oc-login"
+            ],
+            "env": {
+              "CHE_MACHINE_NAME": "ws-machine"
             }
-          },
-          "recipe": {
-            "type": "dockerimage",
-            "content": "eclipse/meteor"
           }
-        }
-      },
-      "projects": [
-        {
-          "links": [],
-          "name": "angular2-quickstart",
-          "attributes": {
-            "language": [
-              "java"
-            ]
-          },
-          "type": "blank",
-          "source": {
-            "location": "https://github.com/angular/quickstart",
-            "type": "git",
-            "parameters": {}
-          },
-          "path": "/angular2-quickstart",
-          "problems": [],
-          "mixins": [
-            "git"
-          ]
-        }
-      ],
-      "name": "angular2-quickstart",
-      "attributes": {
-        "persistVolumes": "false"
-      },
-      "commands": [
-        {
-          "commandLine": "cd ${current.project.path} && npm install",
-          "name": "update dependencies",
-          "attributes": {
-            "previewUrl": ""
-          },
-          "type": "custom"
         },
-        {
-          "commandLine": "cd ${current.project.path} && npm install && npm start",
-          "name": "install and run",
-          "attributes": {
-            "previewUrl": "${server.3000/tcp}"
-          },
-          "type": "custom"
-        },
-        {
-          "commandLine": "cd ${current.project.path} && npm start",
-          "name": "run",
-          "attributes": {
-            "previewUrl": "${server.3000/tcp}"
-          },
-          "type": "custom"
+        "recipe": {
+          "type": "dockerimage",
+          "content": "eclipse/meteor"
         }
-      ],
-      "links": []
-    },
-    "id": "factory3db802wkfbg8wox5",
-    "ide": {
-      "onProjectsLoaded": {
-        "actions": [
-          {
-            "properties": {
-              "file": "/angular2-quickstart/README.md"
-            },
-            "id": "openFile"
-          },
-          {
-            "properties": {
-              "name": "install and run"
-            },
-            "id": "runCommand"
-          }
-        ]
       }
     },
-    "creator": {
-      "name": "",
-      "email": "",
-      "created": 1531236570210,
-      "userId": ""
+    "projects": [
+      {
+        "links": [],
+        "name": "angular2-quickstart",
+        "attributes": {
+          "language": [
+            "java"
+          ]
+        },
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/angular/quickstart",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/angular2-quickstart",
+        "problems": [],
+        "mixins": [
+          "git"
+        ]
+      }
+    ],
+    "name": "angular2-quickstart",
+    "attributes": {
+      "persistVolumes": "false"
+    },
+    "commands": [
+      {
+        "commandLine": "cd ${current.project.path} && npm install",
+        "name": "update dependencies",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd ${current.project.path} && npm install && npm start",
+        "name": "install and run",
+        "attributes": {
+          "previewUrl": "${server.3000/tcp}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd ${current.project.path} && npm start",
+        "name": "run",
+        "attributes": {
+          "previewUrl": "${server.3000/tcp}"
+        },
+        "type": "custom"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "file": "/angular2-quickstart/README.md"
+          },
+          "id": "openFile"
+        },
+        {
+          "properties": {
+            "name": "install and run"
+          },
+          "id": "runCommand"
+        }
+      ]
     }
   }
+}

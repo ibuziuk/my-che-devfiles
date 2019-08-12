@@ -1,0 +1,101 @@
+{
+    "v": "4.0",
+    "name": "jenkins",
+    "workspace": {
+        "defaultEnv": "jenkins",
+        "environments": {
+            "jenkins": {
+                "machines": {
+                    "ws-machine": {
+                        "attributes": {
+                            "memoryLimitBytes": "3221225472"
+                        },
+                        "servers": {
+                            "8080/tcp": {
+                                "port": "8080",
+                                "protocol": "http"
+                            }
+                        },
+                        "installers": [
+                            "com.redhat.oc-login",
+                            "org.eclipse.che.exec",
+                            "org.eclipse.che.ws-agent",
+                            "org.eclipse.che.terminal"
+                        ],
+                        "env": {
+                            "MAVEN_OPTS": "-XX:+UseG1GC -XX:+UseStringDeduplication -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:MaxRAM=600m -Xms256m",
+                            "CHE_MACHINE_NAME": "ws-machine",
+                            "CHE_WORKSPACE_WSAGENT__JAVA__OPTIONS": "-XX:MaxRAM=1500m -XX:MaxRAMFraction=1 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms50m -Dfile.encoding=UTF8 -Djava.security.egd=file:/dev/./urandom"
+                        }
+                    }
+                },
+                "recipe": {
+                    "type": "dockerimage",
+                    "content": "eclipse/centos_jdk8"
+                }
+            }
+        },
+        "projects": [
+            {
+                "name": "jenkins",
+                "attributes": {
+                    "contribute_to_branch": [
+                        "master"
+                    ]
+                },
+                "type": "maven",
+                "source": {
+                    "location": "https://github.com/jenkinsci/jenkins",
+                    "type": "git",
+                    "parameters": {
+                        "branch": "master"
+                    }
+                },
+                "path": "/jenkins",
+                "mixins": [
+                    "pullrequest"
+                ]
+            }
+        ],
+        "name": "jenkinsci",
+        "attributes": {
+            "persistVolumes": "false"
+        },
+        "commands": [
+            {
+                "commandLine": "mvn -f /projects/jenkins clean install -pl war -am -DskipTests && cp /projects/jenkins/war/target/*.war $TOMCAT_HOME/webapps/ROOT.war",
+                "name": "build",
+                "attributes": {
+                    "previewUrl": ""
+                },
+                "type": "mvn"
+            },
+            {
+                "commandLine": "mvn -f /projects/jenkins clean install -pl war -am -DskipTests && cp /projects/jenkins/war/target/*.war $TOMCAT_HOME/webapps/ROOT.war && $TOMCAT_HOME/bin/catalina.sh run",
+                "name": "build and run",
+                "attributes": {
+                    "previewUrl": "${server.8080/tcp}/"
+                },
+                "type": "mvn"
+            }
+        ]
+    },
+    "ide": {
+        "onProjectsLoaded": {
+            "actions": [
+                {
+                    "properties": {
+                        "name": "build and run"
+                    },
+                    "id": "runCommand"
+                },
+                {
+                    "properties": {
+                        "file": "/jenkins/BUILDING.TXT"
+                    },
+                    "id": "openFile"
+                }
+            ]
+        }
+    }
+}

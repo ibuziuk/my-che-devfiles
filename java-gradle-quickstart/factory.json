@@ -79,7 +79,6 @@
     ],
     "links": []
   },
-  "id": "factorydxms3luqlij4g39w",
   "ide": {
     "onProjectsLoaded": {
       "actions": [
@@ -97,11 +96,5 @@
         }
       ]
     }
-  },
-  "creator": {
-    "name": "",
-    "email": "",
-    "created": 1531236570711,
-    "userId": ""
   }
 }
