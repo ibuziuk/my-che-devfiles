@@ -1,183 +1,176 @@
 {
-    "v": "4.0",
-    "name": "vertx-maven-verticle",
-    "workspace": {
-      "defaultEnv": "vertx",
-      "environments": {
-        "vertx": {
-          "machines": {
-            "ws-machine": {
-              "attributes": {
-                "memoryLimitBytes": "2147483648"
-              },
-              "servers": {
-                "8080/tcp": {
-                  "attributes": {},
-                  "port": "8080",
-                  "protocol": "http"
-                }
-              },
-              "volumes": {},
-              "installers": [
-                "com.redhat.oc-login",
-                "org.eclipse.che.exec",
-                "org.eclipse.che.ws-agent",
-                "org.eclipse.che.ls.java",
-                "org.eclipse.che.terminal"
-              ],
-              "env": {
-                "CHE_MACHINE_NAME": "ws-machine",
-                "CHE_WORKSPACE_WSAGENT__JAVA__OPTIONS": "-XX:MaxRAM=1000m -XX:MaxRAMFraction=1 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms50m -Dfile.encoding=UTF8 -Djava.security.egd=file:/dev/./urandom"
+  "v": "4.0",
+  "name": "vertx-maven-verticle",
+  "workspace": {
+    "defaultEnv": "vertx",
+    "environments": {
+      "vertx": {
+        "machines": {
+          "ws-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "servers": {
+              "8080/tcp": {
+                "attributes": {},
+                "port": "8080",
+                "protocol": "http"
               }
-            }
-          },
-          "recipe": {
-            "type": "dockerimage",
-            "content": "registry.devshift.net/che/centos_jdk8"
-          }
-        }
-      },
-      "projects": [
-        {
-          "links": [],
-          "name": "vertx-samples",
-          "attributes": {
-            "vcs.provider.name": [
-              "git"
-            ],
-            "git.current.branch.name": [
-              "master"
-            ],
-            "contribute_to_branch": [
-              "master"
-            ],
-            "git.repository.remotes": [
-              "https://github.com/vert-x3/vertx-examples"
-            ]
-          },
-          "type": "blank",
-          "source": {
-            "location": "https://github.com/vert-x3/vertx-examples",
-            "type": "git",
-            "parameters": {
-              "keepDir": "maven-verticles/maven-verticle"
-            }
-          },
-          "path": "/vertx-samples",
-          "problems": [],
-          "mixins": [
-            "pullrequest",
-            "git"
-          ]
-        },
-        {
-          "links": [],
-          "name": "maven-verticle",
-          "attributes": {
-            "maven.artifactId": [
-              "maven-verticle"
-            ],
-            "maven.parent.version": [
-              ""
-            ],
-            "maven.test.source.folder": [
-              "src/test/java"
-            ],
-            "maven.parent.groupId": [
-              ""
-            ],
-            "maven.version": [
-              "3.2.1"
-            ],
-            "languageVersion": [
-              "1.8.0_45"
-            ],
-            "language": [
-              "java"
-            ],
-            "maven.source.folder": [
-              "src/main/java"
-            ],
-            "git.repository.remotes": [
-              "https://github.com/vert-x3/vertx-examples"
-            ],
-            "maven.groupId": [
-              "io.vertx"
-            ],
-            "maven.packaging": [
-              ""
-            ],
-            "containsJavaFiles": [
-              "true"
-            ],
-            "vcs.provider.name": [
-              "git"
-            ],
-            "git.current.branch.name": [
-              "master"
-            ],
-            "maven.parent.artifactId": [
-              ""
-            ]
-          },
-          "type": "maven",
-          "source": {
-            "parameters": {}
-          },
-          "path": "/vertx-samples/maven-verticles/maven-verticle",
-          "problems": [],
-          "mixins": [
-            "git"
-          ]
-        }
-      ],
-      "name": "vertx-maven-verticle",
-      "attributes": {
-        "persistVolumes": "false"
-      },
-      "commands": [
-        {
-          "commandLine": "cd /projects/vertx-samples/maven-verticles/maven-verticle && mvn package && java -jar target/maven-verticle-*-fat.jar",
-          "name": "run fat jar",
-          "attributes": {
-            "previewUrl": "${server.8080/tcp}"
-          },
-          "type": "custom"
-        },
-        {
-          "commandLine": "mvn -f ${current.project.path} package",
-          "name": "build fat jar",
-          "attributes": {
-            "previewUrl": ""
-          },
-          "type": "mvn"
-        }
-      ],
-      "links": []
-    },
-    "id": "factory3q5u5r3l7vim1u7g",
-    "ide": {
-      "onProjectsLoaded": {
-        "actions": [
-          {
-            "properties": {
-              "file": "/vertx-samples/maven-verticles/maven-verticle/src/main/java/io/vertx/example/HelloWorldVerticle.java"
             },
-            "id": "openFile"
-          },
-          {
-            "properties": {
-              "name": "run fat jar"
-            },
-            "id": "runCommand"
+            "volumes": {},
+            "installers": [
+              "com.redhat.oc-login",
+              "org.eclipse.che.exec",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.ls.java",
+              "org.eclipse.che.terminal"
+            ],
+            "env": {
+              "CHE_MACHINE_NAME": "ws-machine",
+              "CHE_WORKSPACE_WSAGENT__JAVA__OPTIONS": "-XX:MaxRAM=1000m -XX:MaxRAMFraction=1 -XX:+UseParallelGC -XX:MinHeapFreeRatio=10 -XX:MaxHeapFreeRatio=20 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xms50m -Dfile.encoding=UTF8 -Djava.security.egd=file:/dev/./urandom"
+            }
           }
-        ]
+        },
+        "recipe": {
+          "type": "dockerimage",
+          "content": "registry.devshift.net/che/centos_jdk8"
+        }
       }
     },
-    "creator": {
-      "name": "",
-      "email": "",
-      "created": 1531236569602,
-      "userId": ""
+    "projects": [
+      {
+        "links": [],
+        "name": "vertx-samples",
+        "attributes": {
+          "vcs.provider.name": [
+            "git"
+          ],
+          "git.current.branch.name": [
+            "master"
+          ],
+          "contribute_to_branch": [
+            "master"
+          ],
+          "git.repository.remotes": [
+            "https://github.com/vert-x3/vertx-examples"
+          ]
+        },
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/vert-x3/vertx-examples",
+          "type": "git",
+          "parameters": {
+            "keepDir": "maven-verticles/maven-verticle"
+          }
+        },
+        "path": "/vertx-samples",
+        "problems": [],
+        "mixins": [
+          "pullrequest",
+          "git"
+        ]
+      },
+      {
+        "links": [],
+        "name": "maven-verticle",
+        "attributes": {
+          "maven.artifactId": [
+            "maven-verticle"
+          ],
+          "maven.parent.version": [
+            ""
+          ],
+          "maven.test.source.folder": [
+            "src/test/java"
+          ],
+          "maven.parent.groupId": [
+            ""
+          ],
+          "maven.version": [
+            "3.2.1"
+          ],
+          "languageVersion": [
+            "1.8.0_45"
+          ],
+          "language": [
+            "java"
+          ],
+          "maven.source.folder": [
+            "src/main/java"
+          ],
+          "git.repository.remotes": [
+            "https://github.com/vert-x3/vertx-examples"
+          ],
+          "maven.groupId": [
+            "io.vertx"
+          ],
+          "maven.packaging": [
+            ""
+          ],
+          "containsJavaFiles": [
+            "true"
+          ],
+          "vcs.provider.name": [
+            "git"
+          ],
+          "git.current.branch.name": [
+            "master"
+          ],
+          "maven.parent.artifactId": [
+            ""
+          ]
+        },
+        "type": "maven",
+        "source": {
+          "parameters": {}
+        },
+        "path": "/vertx-samples/maven-verticles/maven-verticle",
+        "problems": [],
+        "mixins": [
+          "git"
+        ]
+      }
+    ],
+    "name": "vertx-maven-verticle",
+    "attributes": {
+      "persistVolumes": "false"
+    },
+    "commands": [
+      {
+        "commandLine": "cd /projects/vertx-samples/maven-verticles/maven-verticle && mvn package && java -jar target/maven-verticle-*-fat.jar",
+        "name": "run fat jar",
+        "attributes": {
+          "previewUrl": "${server.8080/tcp}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mvn -f ${current.project.path} package",
+        "name": "build fat jar",
+        "attributes": {
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "file": "/vertx-samples/maven-verticles/maven-verticle/src/main/java/io/vertx/example/HelloWorldVerticle.java"
+          },
+          "id": "openFile"
+        },
+        {
+          "properties": {
+            "name": "run fat jar"
+          },
+          "id": "runCommand"
+        }
+      ]
     }
   }
+}

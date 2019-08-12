@@ -1,97 +1,91 @@
 {
-    "v": "4.0",
-    "name": "che-docs-7",
-    "workspace": {
-      "defaultEnv": "default",
-      "environments": {
-        "default": {
-          "machines": {
-            "ws/jekyll": {
-              "attributes": {
-                "memoryLimitBytes": "536870912"
-              },
-              "servers": {
-                "jekyll-livereload": {
-                  "attributes": {},
-                  "port": "35729",
-                  "protocol": "http"
-                },
-                "jekyll": {
-                  "attributes": {},
-                  "port": "4000",
-                  "protocol": "http"
-                }
-              },
-              "volumes": {
-                "projects": {
-                  "path": "/projects"
-                }
-              },
-              "installers": [],
-              "env": {}
-            }
-          },
-          "recipe": {
-            "type": "openshift",
-            "content": "kind: List\nitems:\n - \n  apiVersion: v1\n  kind: Pod\n  metadata:\n   name: ws\n  spec:\n   containers:\n    - \n     image: eclipse/che-docs\n     name: jekyll\n     resources:\n      limits:\n       memory: 512Mi\n",
-            "contentType": "application/x-yaml"
-          }
-        }
-      },
-      "projects": [
-        {
-          "links": [],
-          "name": "che-docs",
-          "attributes": {},
-          "type": "blank",
-          "source": {
-            "location": "https://github.com/eclipse/che-docs",
-            "type": "git",
-            "parameters": {}
-          },
-          "path": "/che-docs",
-          "description": "",
-          "problems": [],
-          "mixins": []
-        }
-      ],
-      "name": "docs7_1",
-      "attributes": {
-        "editor": "eclipse/che-theia/next",
-        "che.server.secure_exposer": "jwtproxy",
-        "plugins": "eclipse/che-machine-exec-plugin/0.0.1"
-      },
-      "commands": [
-        {
-          "commandLine": "cd /projects/che-docs/src/main && jekyll serve --incremental -H 0.0.0.0",
-          "name": "start",
-          "attributes": {
-            "previewUrl": "${server.jekyll}",
-            "goal": "Run",
-            "machineName": "ws/jekyll"
-          },
-          "type": "mvn"
-        }
-      ],
-      "links": []
-    },
-    "id": "factorycgpdptc6cjetbhr5",
-    "ide": {
-      "onProjectsLoaded": {
-        "actions": [
-          {
-            "properties": {
-              "name": "start"
+  "v": "4.0",
+  "name": "che-docs-7",
+  "workspace": {
+    "defaultEnv": "default",
+    "environments": {
+      "default": {
+        "machines": {
+          "ws/jekyll": {
+            "attributes": {
+              "memoryLimitBytes": "536870912"
             },
-            "id": "runCommand"
+            "servers": {
+              "jekyll-livereload": {
+                "attributes": {},
+                "port": "35729",
+                "protocol": "http"
+              },
+              "jekyll": {
+                "attributes": {},
+                "port": "4000",
+                "protocol": "http"
+              }
+            },
+            "volumes": {
+              "projects": {
+                "path": "/projects"
+              }
+            },
+            "installers": [],
+            "env": {}
           }
-        ]
+        },
+        "recipe": {
+          "type": "openshift",
+          "content": "kind: List\nitems:\n - \n  apiVersion: v1\n  kind: Pod\n  metadata:\n   name: ws\n  spec:\n   containers:\n    - \n     image: eclipse/che-docs\n     name: jekyll\n     resources:\n      limits:\n       memory: 512Mi\n",
+          "contentType": "application/x-yaml"
+        }
       }
     },
-    "creator": {
-      "name": "",
-      "email": "",
-      "created": 1541435929243,
-      "userId": ""
+    "projects": [
+      {
+        "links": [],
+        "name": "che-docs",
+        "attributes": {},
+        "type": "blank",
+        "source": {
+          "location": "https://github.com/eclipse/che-docs",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/che-docs",
+        "description": "",
+        "problems": [],
+        "mixins": []
+      }
+    ],
+    "name": "docs7_1",
+    "attributes": {
+      "editor": "eclipse/che-theia/next",
+      "che.server.secure_exposer": "jwtproxy",
+      "plugins": "eclipse/che-machine-exec-plugin/0.0.1",
+      "persistVolumes": "false"
+    },
+    "commands": [
+      {
+        "commandLine": "cd /projects/che-docs/src/main && jekyll serve --incremental -H 0.0.0.0",
+        "name": "start",
+        "attributes": {
+          "previewUrl": "${server.jekyll}",
+          "goal": "Run",
+          "machineName": "ws/jekyll"
+        },
+        "type": "mvn"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+    "onProjectsLoaded": {
+      "actions": [
+        {
+          "properties": {
+            "name": "start"
+          },
+          "id": "runCommand"
+        }
+      ]
     }
   }
+}

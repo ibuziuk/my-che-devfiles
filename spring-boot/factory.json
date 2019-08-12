@@ -1,0 +1,118 @@
+{
+    "v": "4.0",
+    "name": "springboot-quickstart",
+    "workspace": {
+        "defaultEnv": "java",
+        "environments": {
+            "java": {
+                "machines": {
+                    "ws-machine": {
+                        "attributes": {
+                            "memoryLimitBytes": "2097152000"
+                        },
+                        "servers": {
+                            "8080/tcp": {
+                                "port": "8080",
+                                "protocol": "http"
+                            }
+                        },
+                        "installers": [
+                            "com.redhat.oc-login",
+                            "org.eclipse.che.exec",
+                            "org.eclipse.che.ws-agent",
+                            "org.eclipse.che.terminal"
+                        ],
+                        "env": {
+                            "CHE_MACHINE_NAME": "ws-machine"
+                        }
+                    }
+                },
+                "recipe": {
+                    "type": "dockerimage",
+                    "content": "registry.devshift.net/che/centos_jdk8"
+                }
+            }
+        },
+        "projects": [
+            {
+                "name": "web-java-spring-boot",
+                "attributes": {
+                    "maven.artifactId": [
+                        "gs-spring-boot"
+                    ],
+                    "maven.packaging": [
+                        ""
+                    ],
+                    "vcs.provider.name": [
+                        "git"
+                    ],
+                    "maven.version": [
+                        "0.1.0"
+                    ],
+                    "git.current.branch.name": [
+                        "master"
+                    ],
+                    "language": [
+                        "java"
+                    ],
+                    "git.repository.remotes": [
+                        "https://github.com/che-samples/web-java-spring-boot.git"
+                    ],
+                    "maven.groupId": [
+                        "org.springframework"
+                    ]
+                },
+                "type": "maven",
+                "source": {
+                    "location": "https://github.com/che-samples/web-java-spring-boot.git",
+                    "type": "git"
+                },
+                "path": "/web-java-spring-boot",
+                "description": "",
+                "mixins": [
+                    "git"
+                ]
+            }
+        ],
+        "name": "springboot-quickstart",
+        "attributes": {
+            "persistVolumes": "false"
+        },
+        "commands": [
+            {
+                "commandLine": "mvn -f ${current.project.path} spring-boot:run",
+                "name": "run",
+                "attributes": {
+                    "previewUrl": "${server.8080/tcp}"
+                },
+                "type": "mvn"
+            },
+            {
+                "commandLine": "mvn -f ${current.project.path} clean install",
+                "name": "build",
+                "attributes": {
+                    "previewUrl": ""
+                },
+                "type": "mvn"
+            }
+        ]
+    },
+    "ide": {
+        "onProjectsLoaded": {
+            "actions": [
+                {
+                    "properties": {
+                        "name": "run"
+                    },
+                    "id": "runCommand"
+                },
+                {
+                    "properties": {
+                        "file": "/web-java-spring-boot/src/main/java/hello/HelloController.java"
+                    },
+                    "id": "openFile"
+                }
+            ]
+        }
+    }
+}

@@ -217,7 +217,6 @@
     ],
     "links": []
   },
-  "id": "factory9ppesf180lud4qdh",
   "ide": {
     "onAppLoaded": {
       "actions": [
@@ -252,11 +251,5 @@
         }
       ]
     }
-  },
-  "creator": {
-    "name": "",
-    "email": "",
-    "created": 1531236569144,
-    "userId": ""
   }
 }
