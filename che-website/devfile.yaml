@@ -1,0 +1,38 @@
+# version that works on che.openshift.io
+
+
+specVersion: 0.0.1
+
+name: che-website
+
+projects:
+  - source:
+      type: git
+      location: 'https://github.com/ibuziuk/che-website.git'
+    name: che-website
+
+components:
+  - alias: git
+    type: dockerimage
+    image: sunix/git-devtools
+    mountSources: true
+    memoryLimit: 256M
+
+  - alias: php
+    type: dockerimage
+    image: eclipse/php
+    mountSources: true
+    memoryLimit: 256M
+    args: ['sleep', 'infinity']
+
+commands:
+
+  - name: start che-website
+    actions:
+      - type: exec
+        command: >-
+          if [ ! -f "/projects/che" ]; then ln -s /projects/che-website/che ; fi ;
+          cp /projects/che-website/redirect.html /projects/index.html;
+          service apache2 start && tail -f /var/log/apache2/access.log -f /var/log/apache2/error.log
+        component: php
+        workdir: /projects/
