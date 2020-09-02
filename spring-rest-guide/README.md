@@ -1,4 +1,4 @@
-[![Contribute](https://che.openshift.io/factory/resources/factory-contribute.svg)](https://che.prod-preview.openshift.io/f?url=https://raw.githubusercontent.com/ibuziuk/my-che-devfiles/master/spring-rest-guide/devfile.yaml)
+[![Contribute](https://www.eclipse.org/che/contribute.svg)](https://che.prod-preview.openshift.io/f?url=https://raw.githubusercontent.com/ibuziuk/my-che-devfiles/master/spring-rest-guide/devfile.yaml)
 
 # Known issues
 
