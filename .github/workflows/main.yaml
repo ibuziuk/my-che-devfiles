@@ -11,5 +11,5 @@ jobs:
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@master
         with:
-          message: 'Example of message !'
+          message: 'Try the PR on Eclipse Che hosted by Red Hat.. ![Eclipse Che hosted by Red Hat](https://img.shields.io/badge/Eclipse_Che-Hosted%20by%20Red%20Hat-525C86?logo=eclipse-che&labelColor=FDB940)'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
