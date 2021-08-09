@@ -8,9 +8,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Comment PR with basic message
-        uses: ./
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@master
         with:
-          message: 'Basic message'
+          message: 'Example of message !'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
